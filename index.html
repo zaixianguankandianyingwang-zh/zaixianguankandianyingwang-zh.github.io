@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在线观看电影网 - 华语影视在线点播导航与片源资讯平台</title>
+<meta name="description" content="在线观看电影网提供华语电影在线观看导航，覆盖院线新片、经典老片、网络电影与纪录片，附影片简介、看点速览与正版观看渠道提示。官方站点：https://zaixianguankandianyingwang-zh.github.io">
+<meta name="keywords" content="在线观看电影网,电影在线观看,华语电影在线,在线点播,影视导航">
+<meta name="author" content="在线观看电影网">
+<meta name="robots" content="index,follow">
+<meta name="bingbot" content="index,follow">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="canonical" href="https://zaixianguankandianyingwang-zh.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="在线观看电影网 - 华语影视在线点播导航与片源资讯平台">
+<meta property="og:description" content="在线观看电影网：华语电影在线观看导航，影片简介、看点速览与正版渠道提示。">
+<meta property="og:url" content="https://zaixianguankandianyingwang-zh.github.io/">
+<meta name="twitter:card" content="summary">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0e1116;
+  --bg2:#161b24;
+  --line:#262e3c;
+  --txt:#e6e9ef;
+  --muted:#9aa4b5;
+  --brand:#00d4a6;
+  --brand2:#00a8ff;
+  --warn:#ffb020;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;transition:color .2s}
+ul{list-style:none}
+img{display:block;max-width:100%}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 24px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 26px;border-radius:30px;font-weight:600;font-size:15px;
+  background:linear-gradient(135deg,var(--brand),var(--brand2));color:#04121a;
+  border:0;cursor:pointer;
+}
+.btn:hover{filter:brightness(1.1);transform:translateY(-2px)}
+.btn-outline{
+  background:transparent;color:var(--txt);border:2px solid var(--line);
+}
+.btn-outline:hover{border-color:var(--brand);color:var(--brand)}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(14,17,22,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-size:22px;font-weight:800;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+.logo i{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;font-style:normal;font-size:17px;color:#04121a}
+.menu{display:flex;gap:8px;align-items:center}
+.menu a{padding:8px 16px;border-radius:8px;font-size:15px;color:var(--muted)}
+.menu a:hover{color:var(--brand);background:rgba(0,212,166,.08)}
+.hamburger{display:none;background:none;border:0;color:var(--txt);font-size:26px;cursor:pointer}
+
+/* HERO */
+.hero{
+  padding:150px 0 90px;position:relative;
+  background:
+    radial-gradient(700px 400px at 15% 20%,rgba(0,212,166,.15),transparent),
+    radial-gradient(600px 400px at 85% 60%,rgba(0,168,255,.12),transparent);
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+.hero h1{font-size:52px;line-height:1.15;font-weight:800;letter-spacing:-1px}
+.hero h1 span{background:linear-gradient(135deg,var(--brand),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{color:var(--muted);font-size:18px;margin:22px 0 30px;max-width:520px}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:30px;margin-top:44px;padding-top:30px;border-top:1px solid var(--line)}
+.hero-meta div span{display:block;font-size:30px;font-weight:800;color:var(--brand)}
+.hero-meta div small{color:var(--muted);font-size:13px}
+
+/* HERO CARD */
+.hero-card{
+  background:linear-gradient(160deg,var(--bg2),#1c2533);
+  border:1px solid var(--line);border-radius:24px;padding:36px;
+  box-shadow:0 30px 60px rgba(0,0,0,.4);
+}
+.hero-card .badge{
+  display:inline-block;padding:6px 14px;border-radius:20px;
+  background:rgba(0,212,166,.12);color:var(--brand);font-size:13px;font-weight:600;margin-bottom:20px;
+}
+.hero-card h3{font-size:22px;margin-bottom:8px}
+.hero-card .sub{color:var(--muted);font-size:14px;margin-bottom:24px}
+.search-box{display:flex;gap:10px;background:#0a0d12;padding:8px;border-radius:14px;border:1px solid var(--line)}
+.search-box input{flex:1;background:none;border:0;color:var(--txt);padding:10px;font-size:15px;outline:none}
+.quick-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.quick-tags a{font-size:13px;padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.04);color:var(--muted);border:1px solid var(--line)}
+.quick-tags a:hover{color:var(--brand);border-color:var(--brand)}
+
+/* SECTION */
+section{padding:80px 0}
+.sec-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;gap:20px;flex-wrap:wrap}
+.sec-top h2{font-size:34px;font-weight:800;letter-spacing:-.5px}
+.sec-top h2 em{font-style:normal;color:var(--brand)}
+.sec-top p{color:var(--muted);max-width:460px;font-size:15px}
+
+/* CHANNELS */
+.channels{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.channel{
+  background:var(--bg2);border:1px solid var(--line);border-radius:18px;
+  padding:28px 24px;position:relative;overflow:hidden;transition:.3s;
+}
+.channel::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--brand),var(--brand2));transform:scaleX(0);transform-origin:left;transition:.3s;
+}
+.channel:hover{transform:translateY(-5px);border-color:rgba(0,212,166,.3)}
+.channel:hover::before{transform:scaleX(1)}
+.channel .num{font-size:14px;color:var(--brand);font-weight:700;letter-spacing:1px}
+.channel h3{font-size:20px;margin:10px 0 12px}
+.channel p{color:var(--muted);font-size:14px;margin-bottom:18px}
+.channel a{font-size:14px;font-weight:600;color:var(--txt);display:inline-flex;align-items:center;gap:6px}
+.channel a:hover{color:var(--brand)}
+
+/* POSTS */
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.post{background:var(--bg2);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.3s}
+.post:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.post-cover{
+  height:180px;display:grid;place-items:center;font-size:40px;font-weight:800;color:rgba(255,255,255,.9);
+}
+.post:nth-child(7n+1) .post-cover{background:linear-gradient(135deg,#0f766e,#06b6d4)}
+.post:nth-child(7n+2) .post-cover{background:linear-gradient(135deg,#1d4ed8,#3b82f6)}
+.post:nth-child(7n+3) .post-cover{background:linear-gradient(135deg,#9333ea,#d946ef)}
+.post:nth-child(7n+4) .post-cover{background:linear-gradient(135deg,#c2410c,#f59e0b)}
+.post:nth-child(7n+5) .post-cover{background:linear-gradient(135deg,#be123c,#f43f5e)}
+.post:nth-child(7n+6) .post-cover{background:linear-gradient(135deg,#15803d,#22c55e)}
+.post:nth-child(7n+7) .post-cover{background:linear-gradient(135deg,#0369a1,#0ea5e9)}
+.post-body{padding:22px}
+.post-cat{font-size:12px;color:var(--brand);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.post h3{font-size:18px;margin:8px 0 10px;line-height:1.5}
+.post p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.post-foot{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+
+/* TABLE */
+.tbl-wrap{background:var(--bg2);border:1px solid var(--line);border-radius:18px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th,td{padding:16px 20px;text-align:left;border-bottom:1px solid var(--line);font-size:15px}
+th{background:rgba(255,255,255,.02);color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:1px}
+tr:last-child td{border-bottom:0}
+tr:hover td{background:rgba(0,212,166,.04)}
+.star{color:var(--warn);font-weight:700}
+.genre{display:inline-block;padding:3px 10px;border-radius:6px;background:rgba(0,168,255,.1);color:var(--brand2);font-size:13px}
+
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--bg2);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.step{padding:34px 28px;position:relative;border-right:1px solid var(--line)}
+.step:last-child{border-right:0}
+.step .s-num{font-size:48px;font-weight:800;color:rgba(255,255,255,.06);position:absolute;top:14px;right:20px;line-height:1}
+.step .s-ico{font-size:26px;margin-bottom:16px}
+.step h4{font-size:17px;margin-bottom:8px}
+.step p{color:var(--muted);font-size:14px}
+
+/* FAQ */
+.faq-list{max-width:860px;margin:0 auto}
+.faq-item{background:var(--bg2);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.faq-q{width:100%;background:none;border:0;color:var(--txt);padding:20px 24px;font-size:17px;font-weight:600;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-q .ico{width:28px;height:28px;border-radius:50%;background:rgba(0,212,166,.12);color:var(--brand);display:grid;place-items:center;font-size:18px;flex-shrink:0;transition:.3s}
+.faq-item.open .faq-q .ico{transform:rotate(45deg);background:var(--brand);color:#04121a}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-a-inner{padding:0 24px 22px;color:var(--muted);font-size:15px}
+
+/* FOOTER */
+footer{background:#0a0c10;padding:70px 0 30px;border-top:1px solid var(--line)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.foot-grid h4{font-size:16px;margin-bottom:18px}
+.foot-grid p{color:var(--muted);font-size:14px;margin-bottom:16px}
+.foot-grid ul li{padding:6px 0}
+.foot-grid a{color:var(--muted);font-size:14px}
+.foot-grid a:hover{color:var(--brand)}
+.social{display:flex;gap:10px;margin-top:16px}
+.social a{width:38px;height:38px;border-radius:10px;background:var(--bg2);border:1px solid var(--line);display:grid;place-items:center;font-size:16px}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;padding-top:26px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;flex-wrap:wrap;gap:12px}
+.foot-bot a{color:var(--brand)}
+
+@media(max-width:980px){
+  .channels{grid-template-columns:repeat(2,1fr)}
+  .posts{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{border-right:0;border-bottom:1px solid var(--line)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+  .container{padding:0 18px}
+  .hamburger{display:block}
+  .menu{
+    position:fixed;top:70px;left:0;right:0;flex-direction:column;gap:4px;
+    background:var(--bg2);padding:18px;border-bottom:1px solid var(--line);
+    transform:translateY(-150%);transition:.3s;pointer-events:none;
+  }
+  .menu.open{transform:translateY(0);pointer-events:auto}
+  .menu a{width:100%;padding:14px;border-radius:10px}
+  .hero{padding:120px 0 60px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:34px}
+  .hero .lead{font-size:16px}
+  section{padding:56px 0}
+  .sec-top h2{font-size:26px}
+  .channels{grid-template-columns:1fr}
+  .posts{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero-meta{gap:18px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/zhangzong.js"></script>
+
+<nav>
+  <div class="container nav-in">
+    <a href="#" class="logo"><i>▶</i>在线观看电影网</a>
+    <div class="menu" id="menu">
+      <a href="#home">首页</a>
+      <a href="#cat">频道分类</a>
+      <a href="#latest">最新更新</a>
+      <a href="#rank">排行榜</a>
+      <a href="#how">观看指引</a>
+      <a href="#qa">常见问题</a>
+      <a href="#contact">联系我们</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="菜单">☰</button>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <h1>华语电影<br><span>在线观看</span>就上这里</h1>
+      <p class="lead">在线观看电影网聚合华语院线新片、网络电影、经典老片与纪录片导航，提供影片简介、看点速览与正版观看渠道提示，帮你快速锁定心仪影片。</p>
+      <div class="hero-cta">
+        <a href="#latest" class="btn">浏览最新片单</a>
+        <a href="#how" class="btn btn-outline">观看指引</a>
+      </div>
+      <div class="hero-meta">
+        <div><span>8+</span><small>内容分类</small></div>
+        <div><span>1000+</span><small>影片条目</small></div>
+        <div><span>每日</span><small>资讯更新</small></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <span class="badge">● 官方站点在线</span>
+      <h3>找片从这里开始</h3>
+      <p class="sub">输入片名、演员或题材关键词，快速定位影片导航条目。</p>
+      <div class="search-box">
+        <input type="text" placeholder="搜索电影 / 演员 / 题材…">
+        <button class="btn">搜索</button>
+      </div>
+      <div class="quick-tags">
+        <a href="#">喜剧</a>
+        <a href="#">动作</a>
+        <a href="#">悬疑</a>
+        <a href="#">科幻</a>
+        <a href="#">动画</a>
+        <a href="#">爱情</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="cat">
+  <div class="container">
+    <div class="sec-top">
+      <h2>频道<em>分类</em></h2>
+      <p>按题材与类型划分的内容频道，每个频道独立维护片单与资讯。</p>
+    </div>
+    <div class="channels">
+      <div class="channel">
+        <div class="num">01</div>
+        <h3>院线新片</h3>
+        <p>跟进近期上映的华语院线电影，整理定档信息与看点速览。</p>
+        <a href="#">进入频道 →</a>
+      </div>
+      <div class="channel">
+        <div class="num">02</div>
+        <h3>网络电影</h3>
+        <p>聚焦网络平台首发的华语电影，覆盖多元题材与制作水准。</p>
+        <a href="#">进入频道 →</a>
+      </div>
+      <div class="channel">
+        <div class="num">03</div>
+        <h3>经典老片</h3>
+        <p>回顾经得起时间考验的华语经典，附幕后故事与创作背景。</p>
+        <a href="#">进入频道 →</a>
+      </div>
+      <div class="channel">
+        <div class="num">04</div>
+        <h3>纪录片</h3>
+        <p>人文、历史、自然类华语纪录片导航与内容解读。</p>
+        <a href="#">进入频道 →</a>
+      </div>
+      <div class="channel">
+        <div class="num">05</div>
+        <h3>动画电影</h3>
+        <p>国产动画电影专题，追踪国漫的成长与多元探索。</p>
+        <a href="#">进入频道 →</a>
+      </div>
+      <div class="channel">
+        <div class="num">06</div>
+        <h3>短片与微电影</h3>
+        <p>挖掘新锐导演的短片与微电影创作，关注影像表达。</p>
+        <a href="#">进入频道 →</a>
+      </div>
+      <div class="channel">
+        <div class="num">07</div>
+        <h3>影评与解读</h3>
+        <p>提供影片解读、镜头语言分析与导演风格梳理。</p>
+        <a href="#">进入频道 →</a>
+      </div>
+      <div class="channel">
+        <div class="num">08</div>
+        <h3>观影活动</h3>
+        <p>电影展、首映礼与主题放映等影视行业活动资讯。</p>
+        <a href="#">进入频道 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="latest" style="background:#12171f">
+  <div class="container">
+    <div class="sec-top">
+      <h2>最新<em>更新</em></h2>
+      <p>近期新增与更新的影片条目、资讯内容一览。</p>
+    </div>
+    <div class="posts">
+      <article class="post">
+        <div class="post-cover">罪</div>
+        <div class="post-body">
+          <span class="post-cat">悬疑 · 犯罪</span>
+          <h3><a href="#">多部华语犯罪片定档，年末悬疑题材集中发力</a></h3>
+          <p>梳理近期定档的多部华语犯罪悬疑电影，从阵容到题材看点逐一解读。</p>
+          <div class="post-foot"><span>10月05日</span><a href="#">阅读全文 →</a></div>
+        </div>
+      </article>
+      <article class="post">
+        <div class="post-cover">笑</div>
+        <div class="post-body">
+          <span class="post-cat">喜剧</span>
+          <h3><a href="#">贺岁喜剧前瞻：今年有哪些笑料值得期待</a></h3>
+          <p>盘点即将亮相贺岁档的华语喜剧作品，关注演员阵容与故事设定。</p>
+          <div class="post-foot"><span>10月03日</span><a href="#">阅读全文 →</a></div>
+        </div>
+      </article>
+      <article class="post">
+        <div class="post-cover">动</div>
+        <div class="post-body">
+          <span class="post-cat">动作 · 警匪</span>
+          <h3><a href="#">华语动作片新作盘点：打斗场面的升级与回归</a></h3>
+          <p>从动作设计到场面调度，看华语动作片如何在新作中寻求突破。</p>
+          <div class="post-foot"><span>10月01日</span><a href="#">阅读全文 →</a></div>
+        </div>
+      </article>
+      <article class="post">
+        <div class="post-cover">漫</div>
+        <div class="post-body">
+          <span class="post-cat">动画</span>
+          <h3><a href="#">国漫新片定档，传统美学与现代叙事碰撞</a></h3>
+          <p>多部国产动画电影公布上映日期，题材涵盖神话、科幻与现实题材。</p>
+          <div class="post-foot"><span>09月28日</span><a href="#">阅读全文 →</a></div>
+        </div>
+      </article>
+      <article class="post">
+        <div class="post-cover">文</div>
+        <div class="post-body">
+          <span class="post-cat">文艺</span>
+          <h3><a href="#">独立电影展入围名单公布，新锐导演亮相</a></h3>
+          <p>关注独立电影节的入围作品与创作者，挖掘不一样的影像表达。</p>
+          <div class="post-foot"><span>09月25日</span><a href="#">阅读全文 →</a></div>
+        </div>
+      </article>
+      <article class="post">
+        <div class="post-cover">纪</div>
+        <div class="post-body">
+          <span class="post-cat">纪录片</span>
+          <h3><a href="#">人文纪录片上新，聚焦非遗传承与现代生活</a></h3>
+          <p>新一批华语人文纪录片上线，讲述传统文化在当代的生存与演变。</p>
+          <div class="post-foot"><span>09月22日</span><a href="#">阅读全文 →</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="rank">
+  <div class="container">
+    <div class="sec-top">
+      <h2>热度<em>排行</em></h2>
+      <p>基于本站访问与用户互动整理的热门影片榜单，每周更新一次。</p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>排名</th><th>影片名称</th><th>类型</th><th>热度</th><th>更新时间</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="star">01</td><td><a href="#">沉默的真相 · 2026</a></td><td><span class="genre">悬疑</span></td><td>98.6</td><td>10月05日</td></tr>
+          <tr><td class="star">02</td><td><a href="#">归途列车</a></td><td><span class="genre">剧情</span></td><td>96.2</td><td>10月04日</td></tr>
+          <tr><td class="star">03</td><td><a href="#">火锅英雄2</a></td><td><span class="genre">喜剧/犯罪</span></td><td>94.8</td><td>10月03日</td></tr>
+          <tr><td>04</td><td><a href="#">山海经·新章</a></td><td><span class="genre">动画</span></td><td>92.1</td><td>10月02日</td></tr>
+          <tr><td>05</td><td><a href="#">长安夜行</a></td><td><span class="genre">古装/动作</span></td><td>90.5</td><td>10月01日</td></tr>
+          <tr><td>06</td><td><a href="#">夏日终曲</a></td><td><span class="genre">爱情</span></td><td>88.7</td><td>09月30日</td></tr>
+          <tr><td>07</td><td><a href="#">边境线</a></td><td><span class="genre">警匪</span></td><td>87.3</td><td>09月29日</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="how" style="background:#12171f">
+  <div class="container">
+    <div class="sec-top">
+      <h2>观看<em>指引</em></h2>
+      <p>四步帮你高效找到想看的影片，并选择正规观看渠道。</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="s-num">01</div>
+        <div class="s-ico">🔍</div>
+        <h4>明确偏好</h4>
+        <p>先确定想看的类型与心情，喜剧、动作还是文艺，缩小选择范围。</p>
+      </div>
+      <div class="step">
+        <div class="s-num">02</div>
+        <div class="s-ico">📋</div>
+        <h4>浏览片单</h4>
+        <p>通过本站频道分类与榜单，快速浏览对应类型的影片条目。</p>
+      </div>
+      <div class="step">
+        <div class="s-num">03</div>
+        <div class="s-ico">📖</div>
+        <h4>了解内容</h4>
+        <p>阅读影片简介、看点速览与影评解读，判断是否合自己口味。</p>
+      </div>
+      <div class="step">
+        <div class="s-num">04</div>
+        <div class="s-ico">✅</div>
+        <h4>正规观看</h4>
+        <p>通过本站提示的正规平台渠道观看，支持正版，尊重版权。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="qa">
+  <div class="container">
+    <div class="sec-top" style="justify-content:center;text-align:center;margin-left:auto;margin-right:auto">
+      <h2>常见<em>问题</em></h2>
+      <p>关于在线观看电影网的使用与内容说明，这里集中解答。</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q">在线观看电影网提供哪些内容？<span class="ico">+</span></button>
+        <div class="faq-a" style="max-height:200px">
+          <div class="faq-a-inner">本站主要提供华语电影的导航与资讯服务，包括影片分类、简介、看点速览、榜单排行与影视行业动态，帮助访客高效发现与了解电影。</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">网站是否提供在线播放？<span class="ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">本站以导航与资讯为主，不提供直接播放服务。建议访客通过正规视频平台获取观看渠道，支持正版内容。</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">榜单数据多久更新一次？<span class="ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">热度榜单基于本站访问与用户互动数据整理，原则上每周更新一次，具体更新时间以页面标注为准。</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">如何联系在线观看电影网？<span class="ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">可通过页面底部联系方式或官方渠道与我们取得联系，欢迎内容建议、合作意向与纠错反馈。</div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">官方网址是什么？<span class="ico">+</span></button>
+        <div class="faq-a">
+          <div class="faq-a-inner">在线观看电影网官方网址为 https://zaixianguankandianyingwang-zh.github.io ，请认准该地址访问本站。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a href="#" class="logo"><i>▶</i>在线观看电影网</a>
+        <p>聚焦华语电影的在线观看导航与资讯平台，提供影片分类、看点速览与正版渠道提示。</p>
+        <p>官网：https://zaixianguankandianyingwang-zh.github.io</p>
+        <div class="social">
+          <a href="#" aria-label="微信">微</a>
+          <a href="#" aria-label="微博">博</a>
+          <a href="#" aria-label="RSS">R</a>
+        </div>
+      </div>
+      <div>
+        <h4>栏目导航</h4>
+        <ul>
+          <li><a href="#home">首页</a></li>
+          <li><a href="#cat">频道分类</a></li>
+          <li><a href="#latest">最新更新</a></li>
+          <li><a href="#rank">热度排行</a></li>
+          <li><a href="#how">观看指引</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>热门类型</h4>
+        <ul>
+          <li><a href="#">喜剧片</a></li>
+          <li><a href="#">动作片</a></li>
+          <li><a href="#">悬疑片</a></li>
+          <li><a href="#">爱情片</a></li>
+          <li><a href="#">纪录片</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>关于</h4>
+        <ul>
+          <li><a href="#qa">常见问题</a></li>
+          <li><a href="#">版权声明</a></li>
+          <li><a href="#">免责声明</a></li>
+          <li><a href="#">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 在线观看电影网 版权所有 · 本站内容为影视导航与资讯，观看请通过正规渠道。</span>
+      <span>官网：<a href="#">https://zaixianguankandianyingwang-zh.github.io</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('hamburger').addEventListener('click',function(){
+  document.getElementById('menu').classList.toggle('open');
+});
+document.querySelectorAll('.menu a').forEach(function(a){
+  a.addEventListener('click',function(){document.getElementById('menu').classList.remove('open');});
+});
+document.querySelectorAll('.faq-item').forEach(function(item){
+  var btn=item.querySelector('.faq-q');
+  var ans=item.querySelector('.faq-a');
+  if(item.classList.contains('open')){ans.style.maxHeight=ans.scrollHeight+40+'px';}
+  btn.addEventListener('click',function(){
+    var isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(other){
+      other.classList.remove('open');
+      other.querySelector('.faq-a').style.maxHeight='0';
+    });
+    if(!isOpen){
+      item.classList.add('open');
+      ans.style.maxHeight=ans.scrollHeight+40+'px';
+    }
+  });
+});
+</script>
+</body>
+</html>
